@@ -1,11 +1,10 @@
 .menu {
-  padding-left: 20px;
+  margin-left: 50px;
   &__item {
     font-weight: normal;
-    margin-bottom: 15px;
 
     &:hover {
-      font-weight: bold;
+      font-style: italic;
     }
   }
 

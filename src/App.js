@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
-import { base } from './base'
+import { db } from './firebase'
 
 import Menu from './components/menu';
 import WriteSpace from './components/writeSpace';
+import About from './components/about';
 import './css/app.scss';
 
 const username = 'John Smith';
@@ -16,14 +17,14 @@ class App extends Component {
   }
 
   componentWillMount() {
-    this.lettersRef = base.syncState('letters', {
+    this.lettersRef = db.syncState('letters', {
       context: this,
       state: 'letters'
     });
   }
 
   componentWillUnmount() {
-    base.removeBinding(this.lettersRef);
+    db.removeBinding(this.lettersRef);
   }
 
   updateLetter = (e) => {
@@ -36,7 +37,7 @@ class App extends Component {
     return (
       <div className='app'>
         <div className='container'>
-          <WriteSpace onChange={this.updateLetter.bind(this)}/>
+          <About />
           <Menu username={username}/>
         </div>
       </div>

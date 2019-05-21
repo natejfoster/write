@@ -9,7 +9,7 @@ const Menu = ({username}) => {
       <h4 className='menu__item'>Write</h4>
       <h4 className='menu__item'>Mailbox</h4>
       <h4 className='menu__item'>Drafts</h4>
-      <h4 className='menu__item'>About Write</h4>
+      <h4 className='menu__item'>About</h4>
     </div>
   );
 }
