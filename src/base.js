@@ -2,13 +2,13 @@ import Rebase from 're-base';
 import firebase from 'firebase';
 
 const config = {
-  apiKey: "AIzaSyCcqUjyTR0MhH-e5XA1GROswsJTe0uFrUs",
-  authDomain: "write-d85e3.firebaseapp.com",
-  databaseURL: "https://write-d85e3.firebaseio.com",
-  projectId: "write-d85e3",
-  storageBucket: "write-d85e3.appspot.com",
-  messagingSenderId: "483821876508",
-  appId: "1:483821876508:web:3a74b53d15529b71"
+  apiKey: process.env.REACT_APP_FIREBASE_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_DOMAIN,
+  databaseURL: process.env.REACT_APP_FIREBASE_DATABASE,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_SENDER_ID,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID
 };
 
 const app = firebase.initializeApp(config)
