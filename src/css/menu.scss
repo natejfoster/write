@@ -1,0 +1,15 @@
+.menu {
+  padding-left: 20px;
+  &__item {
+    font-weight: normal;
+    margin-bottom: 15px;
+
+    &:hover {
+      font-weight: bold;
+    }
+  }
+
+  &__username {
+    margin-bottom: 75px;
+  }
+}

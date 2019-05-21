@@ -2,4 +2,18 @@
   margin: 0;
   box-sizing: border-box;
   padding: 0;
+  background-color: #FFF2E3;
+  color: #202B45;
+  font-family: 'Roboto Mono', monospace;
+}
+
+body {
+  margin: 50px;
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  display: flex;
+  width: 75vw;
 }
