@@ -1,9 +1,20 @@
 import React, {Component} from 'react';
-import { db } from './firebase'
+import { db } from './util/firebase'
+import {
+  BrowserRouter as Router,
+  Route,
+} from 'react-router-dom';
 
 import Menu from './components/menu';
+import Profile from './components/profile';
 import WriteSpace from './components/writeSpace';
+import Mailbox from './components/mailbox';
+import Drafts from './components/drafts';
 import About from './components/about';
+import Login from './components/login';
+
+import * as ROUTES from './util/routes';
+
 import './css/app.scss';
 
 const username = 'John Smith';
@@ -35,12 +46,20 @@ class App extends Component {
 
   render() { 
     return (
-      <div className='app'>
-        <div className='container'>
-          <About />
+      <Router>
+        <div className='app'>
           <Menu username={username}/>
+          <div className='container'>
+            <Route exact path={ROUTES.LANDING} component={Login} />
+            <Route path={ROUTES.PROFILE} component={Profile} />
+            <Route path={ROUTES.WRITE} component={WriteSpace} />
+            <Route path={ROUTES.MAILBOX} component={Mailbox} />
+            <Route path={ROUTES.DRAFTS} component={Drafts} />
+            <Route path={ROUTES.ABOUT} component={About} />
+          </div>
         </div>
-      </div>
+      </Router>
+
     );
   }
 }

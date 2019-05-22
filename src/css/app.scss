@@ -12,9 +12,16 @@ body {
   margin: 50px;
   display: flex;
   justify-content: center;
+  justify-content: space-between;
 }
 
 .container {
   display: flex;
   width: 75vw;
+  margin-top: 100px;
+  flex-grow: 1;
+}
+
+a {
+  text-decoration: none;
 }
