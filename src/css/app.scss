@@ -8,20 +8,37 @@
   line-height: 32px;
 }
 
-body {
-  margin: 50px;
-  display: flex;
-  justify-content: center;
-  justify-content: space-between;
+.app {
+  display: grid;
+  grid-template-columns: 75vw 25vw;
+  grid-template-rows: 272px auto;
+  grid-template-areas:
+    "main main-menu"
+    "main context-menu";
 }
 
-.container {
-  display: flex;
-  width: 75vw;
-  margin-top: 100px;
-  flex-grow: 1;
+.main {
+  grid-area: main;
+  padding-top: 144px;
+  padding-left: 96px;
+  padding-right: 144px;
+}
+
+.menu {
+  grid-area: main-menu;
+  padding-top: 48px;
+}
+
+.context-menu {
+  grid-area: context-menu;
+  padding-top: 32px;
 }
 
 a {
   text-decoration: none;
+}
+
+.active {
+  font-weight: 900;
+  color: black;
 }

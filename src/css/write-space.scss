@@ -1,10 +1,7 @@
-.write-space {
-  margin-top: 100px;
-  flex-grow: 1;
-
+.write {
   &__textarea {
     width: 100%;
-    height: 300px;
+    height: 100%;
     font-size: 16px;
     border: none;
     outline: none;

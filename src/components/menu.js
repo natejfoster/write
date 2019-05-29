@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import * as ROUTES from '../util/routes';
 
 
@@ -8,11 +8,11 @@ import '../css/menu.scss';
 const Menu = ({username}) => {
   return (
     <div className='menu'>
-      <h4 className='menu__item menu__username'><Link to={ROUTES.PROFILE}>{username}</Link></h4>
-      <h4 className='menu__item'><Link to={ROUTES.WRITE}>Write</Link></h4>
-      <h4 className='menu__item'><Link to={ROUTES.MAILBOX}>Mailbox</Link></h4>
-      <h4 className='menu__item'><Link to={ROUTES.DRAFTS}>Drafts</Link></h4>
-      <h4 className='menu__item'><Link to={ROUTES.ABOUT}>About</Link></h4>
+      <h4 className='menu__item menu__username'><NavLink to={ROUTES.PROFILE}>{username}</NavLink></h4>
+      <h4 className='menu__item'><NavLink to={ROUTES.WRITE}>Write</NavLink></h4>
+      <h4 className='menu__item'><NavLink to={ROUTES.MAILBOX}>Mailbox</NavLink></h4>
+      <h4 className='menu__item'><NavLink to={ROUTES.DRAFTS}>Drafts</NavLink></h4>
+      <h4 className='menu__item'><NavLink to={ROUTES.ABOUT}>About</NavLink></h4>
     </div>
   );
 }

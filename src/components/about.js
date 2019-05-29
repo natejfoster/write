@@ -3,7 +3,7 @@ import '../css/about.scss'
 
 const About = () => {
   return ( 
-    <div className='about'>
+    <div className='about main'>
       <p className='about__paragraph'>
         Day after day we’re barraged by notifications and to-dos. Write is here to relieve the burden that technology places on our lives.
       </p> 

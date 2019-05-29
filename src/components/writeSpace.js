@@ -4,15 +4,22 @@ import '../css/write-space.scss';
 
 const WriteSpace = ({onChange}) => {
   return (
-    <div className='write-space'>
-      <textarea 
-        className='write-space__textarea'
-        type='text'
-        onChange={onChange}
-        autoFocus
-        placeholder='Write...'
-      />
-    </div>
+
+    <React.Fragment>
+      <div className='write main'>
+        <textarea 
+          className='write__textarea'
+          type='text'
+          onChange={onChange}
+          autoFocus
+          placeholder='Write...'
+        />
+      </div>
+      <div className='write__menu context-menu'>
+        <h4>Save Draft</h4>
+        <h4>Send</h4>
+      </div>
+    </React.Fragment>
   );
 }
  

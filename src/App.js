@@ -48,15 +48,13 @@ class App extends Component {
     return (
       <Router>
         <div className='app'>
+          <Route exact path={ROUTES.LANDING} component={Login} />
+          <Route path={ROUTES.PROFILE} component={Profile} />
+          <Route path={ROUTES.WRITE} component={WriteSpace} />
+          <Route path={ROUTES.MAILBOX} component={Mailbox} />
+          <Route path={ROUTES.DRAFTS} component={Drafts} />
+          <Route path={ROUTES.ABOUT} component={About} />
           <Menu username={username}/>
-          <div className='container'>
-            <Route exact path={ROUTES.LANDING} component={Login} />
-            <Route path={ROUTES.PROFILE} component={Profile} />
-            <Route path={ROUTES.WRITE} component={WriteSpace} />
-            <Route path={ROUTES.MAILBOX} component={Mailbox} />
-            <Route path={ROUTES.DRAFTS} component={Drafts} />
-            <Route path={ROUTES.ABOUT} component={About} />
-          </div>
         </div>
       </Router>
 
