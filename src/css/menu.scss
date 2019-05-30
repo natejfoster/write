@@ -1,12 +1,5 @@
 .menu {
   width: 100%;
-  &__item {
-    font-weight: normal;
-
-    &:hover {
-      font-style: italic;
-    }
-  }
 
   &__username {
     margin-bottom: 64px;

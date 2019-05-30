@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import ReccdItem from './blocks/reccdItem';
 import SentItem from './blocks/sentItem';
 
+import '../css/mailbox.scss';
+
 
 const sent = [
   {from: 'John', to: 'Paul', date: 'March 31, 2018', text: 'hello hope you are well'},
@@ -27,7 +29,7 @@ class Mailbox extends Component {
   constructor(props) {
     super(props);
     this.state = { 
-      curView: 'sent', 
+      curView: 'reccd', 
       reccd: reccd,
       sent: sent
     }
@@ -39,12 +41,13 @@ class Mailbox extends Component {
   }
 
   render() { 
+    const {curView, reccd, sent} = this.state; 
     let items = [];
-    if (this.state.curView === 'reccd') {
-      items = this.state.reccd.map((item, key) => <ReccdItem key={key} name={item.from} date={item.date} />)
+    if (curView === 'reccd') {
+      items = reccd.map((item, key) => <ReccdItem key={key} name={item.from} date={item.date} />)
     } else {
-      items = this.state.sent.map((item, key) => <SentItem key={key} name={item.to} date={item.date} />)
-    }
+      items = sent.map((item, key) => <SentItem key={key} name={item.to} date={item.date} />)
+    } 
 
     return (
       <React.Fragment>
@@ -52,8 +55,8 @@ class Mailbox extends Component {
           {items}
         </div>
         <div className='mailbox__menu context-menu'>
-          <h4 onClick={this.switchView}>Sent</h4>
-          <h4 onClick={this.switchView}>Received</h4>
+          <h4 className={`${curView === 'reccd' ? 'active' : ''} clickable`} onClick={this.switchView}>Received</h4>
+          <h4 className={`${curView === 'sent' ? 'active' : ''} clickable`} onClick={this.switchView}>Sent</h4>
         </div>
       </React.Fragment>
     );

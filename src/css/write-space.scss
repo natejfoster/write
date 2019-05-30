@@ -1,7 +1,8 @@
+@import '_variables';
+
 .write {
   &__textarea {
     width: 100%;
-    height: 100%;
     font-size: 16px;
     border: none;
     outline: none;
@@ -12,4 +13,9 @@
 
     resize: none; 
   }
+
+  &__clear {
+    margin-top: 32px;
+  }
 }
+

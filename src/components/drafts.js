@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
+import { truncate } from '../util/functions';
 
 import DraftItem from './blocks/draftItem';
+
+import '../css/drafts.scss';
 
 const drafts = [
   {from: 'Ava Davis', to: 'Paul', date: 'May 14, 2019', text: 'Hey, Ava! It’s me, Emma again. I hope your...'},
@@ -23,7 +26,7 @@ class Drafts extends Component {
     return (
       <div className='drafts main'>
         {this.state.drafts.map((draft, key) =>
-          <DraftItem text={draft.text} date={draft.date} key={key} />
+          <DraftItem text={truncate(draft.text)} date={draft.date} key={key} />
         )}
       </div>
     );

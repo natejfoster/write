@@ -1,0 +1,11 @@
+@import '_variables';
+
+.drafts {
+  &__draft-item {
+    margin-bottom: 32px;
+
+    &__status {
+      color: $light;
+    }
+  }
+}

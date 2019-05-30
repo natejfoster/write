@@ -1,0 +1,30 @@
+@import '_variables';
+
+.mailbox {
+  &__list {
+    width: 100%;
+  }
+}
+
+.sent-item {
+  margin-bottom: 32px;
+
+  &__name {
+    color: $light;
+    font-weight: normal;
+  }
+
+  &__date {
+    color: $light;
+  }
+}
+
+.reccd-item {
+  &__name {
+    margin-right: 10px;
+  }
+
+  &__date {
+    color: $light;
+  }
+}

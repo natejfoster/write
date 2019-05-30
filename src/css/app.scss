@@ -1,16 +1,18 @@
+@import '_variables';
+
 * {
   margin: 0;
   box-sizing: border-box;
   padding: 0;
   background-color: #FFF2E3;
-  color: #202B45;
-  font-family: 'Roboto Mono', monospace;
+  color: $dark;
+  font-family: input-serif,serif;
   line-height: 32px;
 }
 
 .app {
   display: grid;
-  grid-template-columns: 75vw 25vw;
+  grid-template-columns: 75vw auto;
   grid-template-rows: 272px auto;
   grid-template-areas:
     "main main-menu"
@@ -22,12 +24,14 @@
   padding-top: 144px;
   padding-left: 96px;
   padding-right: 144px;
+  padding-bottom: 144px;
 }
 
 .menu {
   grid-area: main-menu;
   padding-top: 48px;
 }
+
 
 .context-menu {
   grid-area: context-menu;
@@ -38,7 +42,29 @@ a {
   text-decoration: none;
 }
 
+h6 {
+  font-size: 13px;
+  font-weight: normal;
+}
+
+h4 {
+  font-weight: normal;
+}
+
+.danger {
+  color: $danger;
+}
+
+.clickable {
+  font-weight: normal;
+
+  &:hover {
+    font-style: italic;
+    cursor: pointer;
+  }
+}
+
 .active {
-  font-weight: 900;
-  color: black;
+  font-weight: bold;
+  color: $dark;
 }
