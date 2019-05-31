@@ -1,9 +1,9 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import * as ROUTES from '../util/routes';
+import * as ROUTES from '../../util/routes';
 
 
-import '../css/menu.scss';
+import '../../css/menu.scss';
 
 const Menu = ({username}) => {
   return (

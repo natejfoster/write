@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 
-import { auth } from '../util/firebase';
-
 import '../css/landing.scss';
 
 class Landing extends Component {

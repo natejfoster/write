@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 
-import Menu from './components/menu';
+import Menu from './components/blocks/menu';
 import Profile from './components/profile';
 import WriteSpace from './components/writeSpace';
 import Mailbox from './components/mailbox';
@@ -18,7 +18,6 @@ import * as ROUTES from './util/routes';
 
 import './css/app.scss';
 
-const username = 'John Smith';
 const history = createBrowserHistory();
 
 class App extends Component {
@@ -27,7 +26,9 @@ class App extends Component {
     this.state = {
       letters: '',
       loggedIn: false,
-      user: {}
+      user: {},
+      sent: [],
+      reccd: []
     };
   }
 
@@ -52,6 +53,7 @@ class App extends Component {
     auth.signInWithEmailAndPassword(email, pass)
     .then((user) => {
       this.setState({loggedIn: true, user: user.user});
+      this.getData(this.state.user.email)
     })  
     .catch(e => console.log(e));
   }
@@ -74,6 +76,29 @@ class App extends Component {
         .catch(e => console.log(e))
   }
 
+  getData = () => {
+    db.fetch('letterCollection', {
+      asArray: true, 
+      queries: {
+        orderByChild: 'fromEmail',
+        equalTo: this.state.user.email
+      }})
+      .then(data => {
+        this.setState({sent: data})
+      })
+
+      db.fetch('letterCollection', {
+        asArray: true, 
+        queries: {
+          orderByChild: 'toEmail',
+          equalTo: this.state.user.email
+        }})
+        .then(data => {
+          this.setState({reccd: data})
+        })
+  }
+    
+
   render() { 
     return (
       this.state.loggedIn ?
@@ -81,7 +106,7 @@ class App extends Component {
           <div className='app'>
             <Route exact path={ROUTES.LANDING} component={WriteSpace} />
             <Route path={ROUTES.PROFILE} render={() => <Profile logOut={this.logOut} />} />
-            <Route path={ROUTES.MAILBOX} component={Mailbox} />
+            <Route path={ROUTES.MAILBOX} render={() => <Mailbox reccd={this.state.reccd} sent={this.state.sent} />}  />
             <Route path={ROUTES.DRAFTS} component={Drafts} />
             <Route path={ROUTES.ABOUT} component={About} />
             <Menu username={this.state.user.displayName}/>
