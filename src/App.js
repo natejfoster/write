@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { db } from './util/firebase'
+import { db, auth } from './util/firebase'
 import {
   BrowserRouter as Router,
   Route,
@@ -23,7 +23,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      letters: ''
+      letters: '',
+      loggedIn: false
     };
   }
 
@@ -44,20 +45,45 @@ class App extends Component {
     this.setState({letters: value })
   }
 
+  logIn = (email, pass) => {
+    console.log(email);
+    console.log(pass);
+    auth.signInWithEmailAndPassword(email, pass)
+    .then((user) => {
+      this.setState({loggedIn: true});
+      console.log(user);
+    })  
+    .catch(e => console.log(e));
+  }
+
+  logOut = () => {
+    auth.signOut()
+        .then(
+          this.setState({loggedIn: false})
+          
+        )
+        .catch(e => console.log(e));
+  }
+
   render() { 
     return (
-      <Router>
-        <div className='app'>
-          <Route exact path={ROUTES.LANDING} component={Login} />
-          <Route path={ROUTES.PROFILE} component={Profile} />
-          <Route path={ROUTES.WRITE} component={WriteSpace} />
-          <Route path={ROUTES.MAILBOX} component={Mailbox} />
-          <Route path={ROUTES.DRAFTS} component={Drafts} />
-          <Route path={ROUTES.ABOUT} component={About} />
-          <Menu username={username}/>
-        </div>
-      </Router>
-
+      this.state.loggedIn ?
+        <Router>
+          <div className='app'>
+            <Route exact path={ROUTES.LANDING} component={WriteSpace} />
+            <Route path={ROUTES.PROFILE} render={() => <Profile logOut={this.logOut} />} />
+            <Route path={ROUTES.MAILBOX} component={Mailbox} />
+            <Route path={ROUTES.DRAFTS} component={Drafts} />
+            <Route path={ROUTES.ABOUT} component={About} />
+            <Menu username={username}/>
+          </div>
+        </Router>
+      :
+        <Router>
+          <div className='app'>
+            <Route path={ROUTES.LANDING} render={() => <Login logIn={this.logIn} />} />
+          </div>
+        </Router>
     );
   }
 }

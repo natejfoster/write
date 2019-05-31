@@ -51,6 +51,21 @@ h4 {
   font-weight: normal;
 }
 
+p {
+  margin-bottom: 32px;
+}
+
+input {
+  width: 100%;
+  font-size: 16px;
+  border: none;
+  outline: none;
+
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+
 .danger {
   color: $danger;
 }
@@ -67,4 +82,8 @@ h4 {
 .active {
   font-weight: bold;
   color: $dark;
+}
+
+.hidden {
+  display: none;
 }
