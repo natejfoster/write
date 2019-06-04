@@ -20,11 +20,18 @@
 }
 
 .reccd-item {
+  height: 400px;
+  box-shadow: -1px 1px 6px rgba(32, 43, 69, .3);
+  padding-top: 68px;
+  padding-left: 32px;
+
   &__name {
+    font-size: 13px;
     margin-right: 10px;
   }
 
   &__date {
+    font-size: 13px;
     color: $light;
   }
 }

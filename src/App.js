@@ -53,7 +53,7 @@ class App extends Component {
     auth.signInWithEmailAndPassword(email, pass)
     .then((user) => {
       this.setState({loggedIn: true, user: user.user});
-      this.getData(this.state.user.email)
+      this.getData(this.state.user.email);
     })  
     .catch(e => console.log(e));
   }
@@ -72,6 +72,7 @@ class App extends Component {
         .then((res) => {
           res.user.updateProfile({displayName: name});
           this.setState({loggedIn: true, user: res.user});
+          this.getData(this.state.user.email);
         })
         .catch(e => console.log(e))
   }

@@ -9,9 +9,7 @@ class Mailbox extends Component {
   constructor(props) {
     super(props);
     this.state = { 
-      curView: 'reccd', 
-      reccd: this.props.reccd,
-      sent: this.props.sent
+      curView: 'reccd'
     }
   }
 
@@ -21,13 +19,12 @@ class Mailbox extends Component {
   }
 
   render() { 
-    const {curView, reccd, sent} = this.state; 
-    console.log(reccd);
+    const {curView} = this.state; 
     let items = [];
     if (curView === 'reccd') {
-      items = reccd.map((item, key) => <ReccdItem key={key} name={item.from} date={item.date} />)
+      items = this.props.reccd.map((item, key) => <ReccdItem key={key} name={item.from} date={item.date} text={item.text} />)
     } else {
-      items = sent.map((item, key) => <SentItem key={key} name={item.to} date={item.date} />)
+      items = this.props.sent.map((item, key) => <SentItem key={key} name={item.to} date={item.date} />)
     } 
 
     return (
