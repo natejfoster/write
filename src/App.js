@@ -49,6 +49,20 @@ class App extends Component {
     this.setState({letters: value })
   }
 
+  send = () => {
+    console.log('sending letter');
+  }
+
+  startOver = (e) => {
+    this.setState({letters: ''});
+    e.value = '';
+  }
+
+  deleteLetter = (id) => {
+    db.remove('letterCollection/' + id)
+      .then(this.getData)
+  }
+
   logIn = (email, pass) => {
     auth.signInWithEmailAndPassword(email, pass)
     .then((user) => {
@@ -105,9 +119,15 @@ class App extends Component {
       this.state.loggedIn ?
         <Router history={history}>
           <div className='app'>
-            <Route exact path={ROUTES.LANDING} component={WriteSpace} />
+            <Route exact path={ROUTES.LANDING} render={() => 
+              <WriteSpace 
+                onChange={this.updateLetter} 
+                send={this.send}
+                startOver={this.startOver}
+              />}  
+            />
             <Route path={ROUTES.PROFILE} render={() => <Profile logOut={this.logOut} />} />
-            <Route path={ROUTES.MAILBOX} render={() => <Mailbox reccd={this.state.reccd} sent={this.state.sent} />}  />
+            <Route path={ROUTES.MAILBOX} render={() => <Mailbox reccd={this.state.reccd} sent={this.state.sent} delLetter={this.deleteLetter}/>}  />
             <Route path={ROUTES.DRAFTS} component={Drafts} />
             <Route path={ROUTES.ABOUT} component={About} />
             <Menu username={this.state.user.displayName}/>

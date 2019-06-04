@@ -9,6 +9,7 @@ class WriteSpace extends Component {
     this.state = { 
       curView: 'draft'
      }
+     this.textInput = React.createRef();
   }
 
   switchView = () => {
@@ -27,12 +28,13 @@ class WriteSpace extends Component {
             onKeyUp={e => adjustTextarea(e.target)}
             autoFocus
             placeholder='Write...'
+            ref={this.textInput}
           />
         </div>
         <div className='write__menu context-menu'>
           <h4 className='clickable' onClick={this.switchView}>Send</h4>
           <h4 className='clickable' onClick={this.switchView}>Save as a draft</h4>
-          <h4 className='clickable write__clear danger' onClick={this.switchView}>Start over</h4>
+          <h4 className='clickable write__clear danger' onClick={() => {this.props.startOver(this.textInput.current)}} > Start over</h4>
         </div>
       </React.Fragment>
     );

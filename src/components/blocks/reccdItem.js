@@ -2,10 +2,10 @@ import React from 'react';
 
 import { truncate } from '../../util/functions';
 
-const ReccdItem = ({name, date, text}) => {
+const ReccdItem = ({from, date, text, onClick}) => {
   return (
-    <div className='reccd-item clickable'>
-      <span className='reccd-item__name'>{name}</span>
+    <div className='reccd-item clickable' onClick={onClick}>
+      <span className='reccd-item__name'>{from}</span>
       <span className='reccd-item__date'>{date}</span>
       <p>{truncate(text)}</p>
     </div>
