@@ -8,15 +8,15 @@ const adjustTextarea = (obj) => {
   obj.style.height = (25 + obj.scrollHeight)+'px';
 }
 
-const getSent = (email) => {
-  let sent;
-  db.fetch('letterCollection', {asArray: true})
-    .then(data => {
-      console.log(data);
-      return data;
-    })
+const formatDate = (date) => {
+  let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  let month = months[date.getMonth()];
+  let day = date.getDate();
+  let year = date.getFullYear();
+  let string = `${month} ${day}, ${year}`;
+  return string;
 }
 
 
 
-export {truncate, adjustTextarea, getSent};
+export {truncate, adjustTextarea, formatDate};

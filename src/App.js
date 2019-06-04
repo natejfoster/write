@@ -19,6 +19,7 @@ import * as ROUTES from './util/routes';
 import './css/app.scss';
 
 const history = createBrowserHistory();
+const letterCollection = 'letterCollection'
 
 class App extends Component {
   constructor(props) {
@@ -50,7 +51,19 @@ class App extends Component {
   }
 
   send = () => {
-    console.log('sending letter');
+    let date = Date.now();
+    console.log(date);
+    let letter = {
+      date : date,
+      from : this.state.user.displayName,
+      fromEmail : this.state.user.email,
+      text : "Ava, it truly is great to hear from you! I am glad to hear you are well",
+      to : "Ava Green",
+      toEmail : "ava@mail.com"
+    }
+    console.log(letter)
+    db.push('letterCollection', {data: letter}).then(console.log('letter sent'))
+
   }
 
   startOver = (e) => {
@@ -59,7 +72,7 @@ class App extends Component {
   }
 
   deleteLetter = (id) => {
-    db.remove('letterCollection/' + id)
+    db.remove(letterCollection + '/' + id)
       .then(this.getData)
   }
 

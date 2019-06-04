@@ -32,7 +32,7 @@ class WriteSpace extends Component {
           />
         </div>
         <div className='write__menu context-menu'>
-          <h4 className='clickable' onClick={this.switchView}>Send</h4>
+          <h4 className='clickable' onClick={() => this.props.send()}>Send</h4>
           <h4 className='clickable' onClick={this.switchView}>Save as a draft</h4>
           <h4 className='clickable write__clear danger' onClick={() => {this.props.startOver(this.textInput.current)}} > Start over</h4>
         </div>
