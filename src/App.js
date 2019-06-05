@@ -46,23 +46,20 @@ class App extends Component {
 
   updateLetter = (e) => {
     let value = e.target.value;
-    console.log(value);
     this.setState({letters: value })
   }
 
-  send = () => {
+  send = (letter, email) => {
     let date = Date.now();
-    console.log(date);
-    let letter = {
-      date : date,
-      from : this.state.user.displayName,
-      fromEmail : this.state.user.email,
-      text : "Ava, it truly is great to hear from you! I am glad to hear you are well",
-      to : "Ava Green",
-      toEmail : "ava@mail.com"
+    let newLetter = {
+      date: date,
+      from: this.state.user.displayName,
+      fromEmail: this.state.user.email,
+      text: letter,
+      to: "Ava Green",
+      toEmail: email
     }
-    console.log(letter)
-    db.push('letterCollection', {data: letter}).then(console.log('letter sent'))
+    db.push('letterCollection', {data: newLetter})
 
   }
 

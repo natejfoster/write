@@ -1,12 +1,4 @@
-import { db } from './firebase';
-
 const truncate = (input) => input.length > 42 ? `${input.substring(0, 42)}...` : input;
-
-
-const adjustTextarea = (obj) => {
-  obj.style.height = '1px';
-  obj.style.height = (25 + obj.scrollHeight)+'px';
-}
 
 const formatDate = (date) => {
   let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -17,6 +9,4 @@ const formatDate = (date) => {
   return string;
 }
 
-
-
-export {truncate, adjustTextarea, formatDate};
+export {truncate, formatDate};
