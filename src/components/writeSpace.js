@@ -49,6 +49,7 @@ class WriteSpace extends Component {
       <React.Fragment>
         <div className='write main'>
           <Textarea 
+            value={this.props.text && this.props.text}
             className='write__textarea'
             type='text'
             onChange={this.props.onChange}

@@ -5,22 +5,23 @@ const About = () => {
   return ( 
     <div className='about main'>
       <p className='about__paragraph'>
-        Day after day we’re barraged by notifications and to-dos. Write is here to relieve the burden that technology places on our lives.
+        Write helps you communicate with the people you love.
       </p> 
       <p className='about__paragraph'>
-        Write is a place to breathe, think deeply, and communicate with the ones you love.
+        By bringing reflection and connection into an online letter writing space space, Write reclaims the meaning lost in digital communication. 
       </p>
       <p className='about__paragraph'>
-        When you send a letter through Write, it is delivered at a random point within seven days after clicking the send button. Many digital communication methods let us know when the other person receives something, and all digital communication methods send things immediately. This creates a burden on both parties—a burden to read quickly and reply promptly. Write isn’t supposed to be burdensome.
+        Letter writing is reflective and connecting for both the reader and writer. It’s a unique opportunity to reflect on yourself, discover more about someone else, and focus on expressing yourself through writing. Physically writing a letter is time consuming and associated with insecurities like bad handwriting and poor writing skills. On the other hand, digital communication is temporary and lacks meaning. Write makes it easy to send and receive meaningful communication not intermixed with the other to-dos and logistics cluttering our email inboxes, text histories, and voicemails. 
       </p>
       <p className='about__paragraph'>
-        Write is a project designed by Matt Wright and<br />developed by Nathan Foster. 
-      </p>
-      <p className='about__paragraph'>
-        Want to chat? Send Matt an email at<br />matt.wright.matt@gmail.com.
+        To help you write letters, Write prompts you periodically with self-reflective questions to ask yourself and to ask people around you. Once you send a letter with Write, it will be delivered at a random moment within seven days after sending. When someone knows the exact moment a message was delivered and seen, an expectation for a hasty response is placed on both the sender and receiver.  By delivering letters serendipitously, Write creates a space for reflecting on the content of the letter. 
       </p>
     </div>
    );
 }
  
 export default About;
+
+
+
+

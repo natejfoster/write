@@ -1,6 +1,11 @@
 @import '_variables';
 
 .drafts {
+
+  &__delete {
+    margin-top: 32px;
+  }
+
   &__draft-item {
     margin-bottom: 32px;
 

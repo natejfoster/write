@@ -42,40 +42,34 @@ class Landing extends Component {
 
   render() { 
     const getEmail = 
-      <div className='main'>
-        <p>
-          Day after day we’re barraged by notifications and to-dos. Write is here to relieve the burden that technology places on our lives.
-        </p>
-        <p>
-          Write is a place to breathe, think deeply, and communicate with the ones you love.
-        </p>
+      <div>
         <input 
           type='text' 
-          placeholder='Ready to Write? Enter your email here' 
+          placeholder='Type your email to log in' 
           onChange={this.onChange}
           onKeyDown={this.onEnter} 
           name='email' 
           autoFocus
         />
         {this.state.email !== '' && <h6>{this.state.newUser ? 
-          'Welcome to Write Press enter to continue.'
+          'Welcome to Write! Press enter to continue.'
           : 
-          'Press enter to continue'}</h6>
+          'Welcome! Press enter to continue'}</h6>
         }
         <h6 className='clickable landing__sign-in-up' onClick={this.toggleNewUser}>
           {this.state.newUser ?
             'Returning user? Click to log in'
             :
-            'New user? Click to sign up'
+            'or, click here to create an account'
           }
         </h6>
       </div>
 
     const getPassword = 
-      <div className='main'>
+      <div>
         <input 
           type='password'
-          placeholder='Please enter your password'
+          placeholder='Type password'
           onChange={this.onChange}
           onKeyDown={this.onEnter}
           name='pass'
@@ -86,7 +80,7 @@ class Landing extends Component {
 
 
     const getName = 
-      <div className='main'>
+      <div className>
         <input 
           type='text' 
           placeholder='What is your full name?' 
@@ -99,7 +93,13 @@ class Landing extends Component {
       </div>
 
     return (
-      <div>
+      <div className='main'>
+        <p>
+          Write helps you communicate with the people you love.
+        </p>
+        <p>
+          Letter writing is reflective and connecting for both the reader and writer. It’s a unique opportunity to reflect, discover more about someone else, and focus on expressing yourself through writing. By bringing reflection and connection into an online letter writing space, Write reclaims the meaning lost in digital communication.
+        </p>
         {
           this.state.emailEntered ? this.state.passEntered ? getName : getPassword : getEmail
         }

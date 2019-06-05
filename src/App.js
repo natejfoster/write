@@ -3,6 +3,7 @@ import { db, auth } from './util/firebase'
 import {
   BrowserRouter as Router,
   Route,
+  Redirect
 } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 
@@ -29,7 +30,8 @@ class App extends Component {
       loggedIn: false,
       user: {},
       sent: [],
-      reccd: []
+      reccd: [],
+      drafts: []
     };
   }
 
@@ -80,6 +82,15 @@ class App extends Component {
     db.remove(letterCollection + '/' + id)
   }
 
+  deleteDraft = (id) => {
+    db.remove(`users/${this.state.user.uid}/drafts/${id}`)
+  }
+
+  editDraft = (draft) => {
+    console.log(draft);
+    this.setState({letters: draft.text});
+  }
+
   logIn = (email, pass) => {
     auth.signInWithEmailAndPassword(email, pass)
     .then((user) => {
@@ -128,15 +139,21 @@ class App extends Component {
       }
     })
 
-      db.bindToState('letterCollection', {
-        context: this,
-        state: 'reccd',
-        asArray: true, 
-        queries: {
-          orderByChild: 'toEmail',
-          equalTo: this.state.user.email
-        }
-      })
+    db.bindToState('letterCollection', {
+      context: this,
+      state: 'reccd',
+      asArray: true, 
+      queries: {
+        orderByChild: 'toEmail',
+        equalTo: this.state.user.email
+      }
+    })
+
+    db.bindToState(`users/${this.state.user.uid}/drafts`, {
+      context: this,
+      state: 'drafts',
+      asArray: true
+    })
   }
     
 
@@ -146,7 +163,8 @@ class App extends Component {
         <Router history={history}>
           <div className='app'>
             <Route exact path={ROUTES.LANDING} render={() => 
-              <WriteSpace 
+              <WriteSpace
+                text={this.state.letters}
                 onChange={this.updateLetter} 
                 send={this.send}
                 startOver={this.startOver}
@@ -154,7 +172,7 @@ class App extends Component {
             />
             <Route path={ROUTES.PROFILE} render={() => <Profile logOut={this.logOut} />} />
             <Route path={ROUTES.MAILBOX} render={() => <Mailbox reccd={this.state.reccd} sent={this.state.sent} delLetter={this.deleteLetter}/>}  />
-            <Route path={ROUTES.DRAFTS} component={Drafts} />
+            <Route path={ROUTES.DRAFTS} render={() => <Drafts drafts={this.state.drafts} editDraft={this.editDraft} delDraft={this.deleteDraft}/>} />
             <Route path={ROUTES.ABOUT} component={About} />
             <Menu username={this.state.user.displayName}/>
           </div>
