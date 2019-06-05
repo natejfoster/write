@@ -50,17 +50,25 @@ class App extends Component {
   }
 
   send = (letter, email) => {
-    let date = Date.now();
-    let newLetter = {
-      date: date,
-      from: this.state.user.displayName,
-      fromEmail: this.state.user.email,
-      text: letter,
-      to: "Ava Green",
-      toEmail: email
-    }
-    db.push('letterCollection', {data: newLetter})
-
+    db.fetch('users', {
+      asArray: true,
+      queries: {
+        orderByChild: 'email',
+        equalTo: email
+      }
+    }).then((res) => {
+      let date = Date.now();
+      
+      let newLetter = {
+        date: date,
+        from: this.state.user.displayName,
+        fromEmail: this.state.user.email,
+        text: letter,
+        to: res[0].displayName,
+        toEmail: email
+      }
+      db.push('letterCollection', {data: newLetter})
+    })
   }
 
   startOver = (e) => {
@@ -70,7 +78,6 @@ class App extends Component {
 
   deleteLetter = (id) => {
     db.remove(letterCollection + '/' + id)
-      .then(this.getData)
   }
 
   logIn = (email, pass) => {
@@ -94,33 +101,42 @@ class App extends Component {
   signUp = (email, pass, name) => {
     auth.createUserWithEmailAndPassword(email, pass)
         .then((res) => {
-          res.user.updateProfile({displayName: name});
-          this.setState({loggedIn: true, user: res.user});
-          this.getData(this.state.user.email);
+          res.user.updateProfile({displayName: name})
+          .then(() => {
+            this.setState({loggedIn: true, user: res.user});
+            this.getData(this.state.user.email);
+  
+            let newUser = {
+              displayName: this.state.user.displayName,
+              email: this.state.user.email
+            }
+  
+            db.post(`users/${this.state.user.uid}`, {data: newUser})
+          });
         })
         .catch(e => console.log(e))
   }
 
   getData = () => {
-    db.fetch('letterCollection', {
+    db.bindToState('letterCollection', {
+      context: this,
+      state: 'sent',
       asArray: true, 
       queries: {
         orderByChild: 'fromEmail',
-        equalTo: this.state.user.email
-      }})
-      .then(data => {
-        this.setState({sent: data})
-      })
+        equalTo: this.state.user.email,
+      }
+    })
 
-      db.fetch('letterCollection', {
+      db.bindToState('letterCollection', {
+        context: this,
+        state: 'reccd',
         asArray: true, 
         queries: {
           orderByChild: 'toEmail',
           equalTo: this.state.user.email
-        }})
-        .then(data => {
-          this.setState({reccd: data})
-        })
+        }
+      })
   }
     
 

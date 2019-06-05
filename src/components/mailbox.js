@@ -39,9 +39,9 @@ class Mailbox extends Component {
     const {curView, isViewing, curLetter} = this.state; 
     let items = [];
     if (curView === 'reccd') {
-      items = this.props.reccd.map((letter, key) => <ReccdItem key={key} from={letter.from} date={letter.date} text={letter.text} onClick={() => this.selectLetter(letter)}/>)
+      items = this.props.reccd.reverse().map((letter, key) => <ReccdItem key={key} from={letter.from} date={letter.date} text={letter.text} onClick={() => this.selectLetter(letter)}/>)
     } else {
-      items = this.props.sent.map((item, key) => <SentItem key={key} name={item.to} date={item.date} />)
+      items = this.props.sent.reverse().map((item, key) => <SentItem key={key} name={item.to} date={item.date} />)
     } 
 
     return (
