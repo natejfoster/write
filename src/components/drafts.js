@@ -38,8 +38,7 @@ class Drafts extends Component {
   render() { 
     const { isViewing, curDraft} = this.state; 
 
-    return (
-      isViewing ? 
+    let draftSelected = 
       <React.Fragment>
         <div className='mailbox__list main'>
           <div>{curDraft.text}</div>
@@ -50,11 +49,12 @@ class Drafts extends Component {
           <h4 className='clickable danger drafts__delete' onClick={() => this.delDraft(curDraft.key)}>Throw away draft</h4>
         </div>
       </React.Fragment>
-    :
+
+    let drafts =
       <React.Fragment>
         <div className='drafts main'>
           {this.props.curLetter !== '' && <DraftItem text={this.props.curLetter} isCurrent />}
-          { this.props.drafts.length !== 0 ? 
+          {this.props.drafts.length !== 0 || this.props.curLetter !== '' ? 
             this.props.drafts.map((draft, key) =>
               <DraftItem text={draft.text} date={draft.date} key={key} onClick={() => this.selectDraft(draft)}/>
             )
@@ -63,6 +63,9 @@ class Drafts extends Component {
           }
         </div>
       </React.Fragment>
+
+    return (
+      isViewing ? draftSelected : drafts
     );
   }
 }
