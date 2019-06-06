@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { truncate } from '../util/functions';
 import { withRouter } from 'react-router-dom';
 
 import DraftItem from './blocks/draftItem';
@@ -28,6 +27,7 @@ class Drafts extends Component {
 
   editDraft = () => {
     this.props.editDraft(this.state.curDraft);
+    this.props.delDraft(this.state.curDraft.key);
     this.props.history.push('/')
   }
 
@@ -53,9 +53,14 @@ class Drafts extends Component {
     :
       <React.Fragment>
         <div className='drafts main'>
-          {this.props.drafts.map((draft, key) =>
-            <DraftItem text={truncate(draft.text)} date={draft.date} key={key} onClick={() => this.selectDraft(draft)}/>
-          )}
+          {this.props.curLetter !== '' && <DraftItem text={this.props.curLetter} isCurrent />}
+          { this.props.drafts.length !== 0 ? 
+            this.props.drafts.map((draft, key) =>
+              <DraftItem text={draft.text} date={draft.date} key={key} onClick={() => this.selectDraft(draft)}/>
+            )
+            :
+            <h4 className='inactive'>No Drafts</h4>
+          }
         </div>
       </React.Fragment>
     );

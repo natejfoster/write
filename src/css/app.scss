@@ -84,6 +84,11 @@ input {
   color: $dark;
 }
 
+.inactive {
+  font-weight: normal;
+  color: $light;
+}
+
 .hidden {
   display: none;
 }

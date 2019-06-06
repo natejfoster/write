@@ -2,8 +2,7 @@ import React, {Component} from 'react';
 import { db, auth } from './util/firebase'
 import {
   BrowserRouter as Router,
-  Route,
-  Redirect
+  Route
 } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 
@@ -26,7 +25,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      letters: '',
+      letter: '',
       loggedIn: false,
       user: {},
       sent: [],
@@ -35,20 +34,13 @@ class App extends Component {
     };
   }
 
-  componentWillMount() {
-    this.lettersRef = db.syncState('letters', {
-      context: this,
-      state: 'letters'
-    });
-  }
-
   componentWillUnmount() {
-    db.removeBinding(this.lettersRef);
+    db.removeBinding(this.letterRef);
   }
 
   updateLetter = (e) => {
     let value = e.target.value;
-    this.setState({letters: value })
+    this.setState({letter: value })
   }
 
   send = (letter, email) => {
@@ -74,7 +66,7 @@ class App extends Component {
   }
 
   startOver = (e) => {
-    this.setState({letters: ''});
+    this.setState({letter: ''});
     e.value = '';
   }
 
@@ -87,8 +79,17 @@ class App extends Component {
   }
 
   editDraft = (draft) => {
-    console.log(draft);
-    this.setState({letters: draft.text});
+    // save current edit if currently editing
+    this.setState({letter: draft.text});
+  }
+
+  saveDraft = (draftText) => {
+    let draft = {
+      date: Date.now(),
+      text: draftText
+    }
+    db.push(`users/${this.state.user.uid}/drafts`, {data: draft});
+    this.setState({letter: ''});
   }
 
   logIn = (email, pass) => {
@@ -119,7 +120,9 @@ class App extends Component {
   
             let newUser = {
               displayName: this.state.user.displayName,
-              email: this.state.user.email
+              email: this.state.user.email,
+              letter: '',
+              drafts: {}
             }
   
             db.post(`users/${this.state.user.uid}`, {data: newUser})
@@ -154,27 +157,34 @@ class App extends Component {
       state: 'drafts',
       asArray: true
     })
+
+    this.letterRef = db.syncState(`users/${this.state.user.uid}/letter`, {
+      context: this,
+      state: 'letter'
+    });
   }
     
 
   render() { 
+    let {user, drafts, letter, reccd, sent} = this.state;
     return (
       this.state.loggedIn ?
         <Router history={history}>
           <div className='app'>
             <Route exact path={ROUTES.LANDING} render={() => 
               <WriteSpace
-                text={this.state.letters}
+                text={letter}
                 onChange={this.updateLetter} 
+                saveDraft={this.saveDraft}
                 send={this.send}
                 startOver={this.startOver}
               />}  
             />
             <Route path={ROUTES.PROFILE} render={() => <Profile logOut={this.logOut} />} />
-            <Route path={ROUTES.MAILBOX} render={() => <Mailbox reccd={this.state.reccd} sent={this.state.sent} delLetter={this.deleteLetter}/>}  />
-            <Route path={ROUTES.DRAFTS} render={() => <Drafts drafts={this.state.drafts} editDraft={this.editDraft} delDraft={this.deleteDraft}/>} />
+            <Route path={ROUTES.MAILBOX} render={() => <Mailbox reccd={reccd} sent={sent} delLetter={this.deleteLetter}/>}  />
+            <Route path={ROUTES.DRAFTS} render={() => <Drafts curLetter={letter} drafts={drafts} editDraft={this.editDraft} delDraft={this.deleteDraft}/>} />
             <Route path={ROUTES.ABOUT} component={About} />
-            <Menu username={this.state.user.displayName}/>
+            <Menu username={user.displayName}/>
           </div>
         </Router>
       :

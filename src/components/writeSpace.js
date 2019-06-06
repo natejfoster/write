@@ -11,15 +11,25 @@ class WriteSpace extends Component {
       email: '',
       isSending: false,
       preSend: true,
-      sent: false
+      sent: false,
+      isSaving: false
      }
      this.textInput = React.createRef();
+  }
+
+  saveDraft = () => {
+    this.props.saveDraft(this.textInput.current.value);
+    this.setState({isSaving: true});
+    window.setTimeout(() => {
+      this.setState({isSaving: false});
+      this.textInput.current.value = '';
+    }, 2000)
   }
 
   sendFlow = () => {
     this.setState({isSending: true, letter: this.textInput.current.value})
     //wait for a bit, then load into get email page
-    window.setTimeout(() => this.setState({preSend: false}), 3000)
+    window.setTimeout(() => this.setState({preSend: false}), 2000)
   };
 
   sendLetter = (letter, email) => {
@@ -34,7 +44,7 @@ class WriteSpace extends Component {
         sent: false
       });
       this.textInput.current.value = '';
-    }, 6000)
+    }, 2000)
   };
 
   getEmail = (e) => {
@@ -43,7 +53,7 @@ class WriteSpace extends Component {
 
 
   render() { 
-    let {letter, email} = this.state;
+    let {letter, email, isSaving, isSending} = this.state;
 
     let draft = 
       <React.Fragment>
@@ -57,10 +67,11 @@ class WriteSpace extends Component {
             placeholder='Write...'
             inputRef={this.textInput}
           />
+          {isSaving && <h6>Saved as draft</h6>}
         </div>
         <div className='write__menu context-menu'>
           <h4 className='clickable' onClick={() => this.sendFlow()}>Send</h4>
-          <h4 className='clickable'>Save as a draft</h4>
+          <h4 className='clickable' onClick={this.saveDraft}>Save as a draft</h4>
           <h4 className='clickable write__clear danger' onClick={() => {this.props.startOver(this.textInput.current)}}>Start over</h4>
         </div>
       </React.Fragment>
@@ -98,7 +109,7 @@ class WriteSpace extends Component {
       </React.Fragment>
 
     return (
-      this.state.isSending ? send : draft
+      isSending ? send : draft
     );
   }
 }

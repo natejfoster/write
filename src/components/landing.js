@@ -80,7 +80,7 @@ class Landing extends Component {
 
 
     const getName = 
-      <div className>
+      <div>
         <input 
           type='text' 
           placeholder='What is your full name?' 

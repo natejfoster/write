@@ -58,7 +58,7 @@ class Mailbox extends Component {
       :
         <React.Fragment>
           <div className='mailbox__list main'>
-            {items}
+            {items.length !== 0 ? items : <h4 className='inactive'>No Messages</h4>}
           </div>
           <div className='mailbox__menu context-menu'>
             <h4 className={`${curView === 'reccd' ? 'active' : ''} clickable`} onClick={this.switchView}>Received</h4>
