@@ -68,6 +68,7 @@ class App extends Component {
   startOver = (e) => {
     this.setState({letter: ''});
     e.value = '';
+    e.focus();
   }
 
   deleteLetter = (id) => {

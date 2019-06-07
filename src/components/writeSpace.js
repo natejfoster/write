@@ -51,6 +51,12 @@ class WriteSpace extends Component {
     this.setState({email: e.target.value})
   };
 
+  cancel = () => {
+    this.setState({email: '', isSending: false, preSend: true, sent: false}, () => {
+      this.textInput.current.focus();
+    });
+  }
+
 
   render() { 
     let {letter, email, isSaving, isSending} = this.state;
@@ -107,8 +113,7 @@ class WriteSpace extends Component {
         {this.state.preSend ? preSend : this.state.sent ? sent : enterEmail}
         <div className='write__menu context-menu'>
           <h4 className='active'>Send</h4>
-          <h4 className='clickable' onClick={this.switchView}>Save as a draft</h4>
-          <h4 className='clickable write__clear danger' onClick={() => {this.props.startOver(this.textInput.current)}} > Start over</h4>
+          <h4 className='clickable danger' onClick={this.cancel}>Cancel</h4>
         </div>
       </React.Fragment>
 
