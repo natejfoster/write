@@ -113,7 +113,7 @@ class WriteSpace extends Component {
         {this.state.preSend ? preSend : this.state.sent ? sent : enterEmail}
         <div className='write__menu context-menu'>
           <h4 className='active'>Send</h4>
-          <h4 className='clickable danger' onClick={this.cancel}>Cancel</h4>
+          <h4 className='clickable danger write__cancel' onClick={this.cancel}>Cancel</h4>
         </div>
       </React.Fragment>
 

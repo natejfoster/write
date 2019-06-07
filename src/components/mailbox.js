@@ -52,7 +52,7 @@ class Mailbox extends Component {
       isViewing ? 
         <React.Fragment>
           <div className='mailbox__list main'>
-            <Letter from={curLetter.from} date={curLetter.date} text={curLetter.text} />
+            <Letter from={curLetter.from} date={curLetter.date} fromEmail={curLetter.fromEmail} text={curLetter.text} />
           </div>
           <div className='mailbox__menu context-menu'>
             <h4 className='clickable' onClick={this.back}>Back to Mailbox</h4>

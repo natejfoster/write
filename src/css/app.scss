@@ -40,6 +40,7 @@
 
 a {
   text-decoration: none;
+  height: 100%;
 }
 
 h6 {
@@ -67,7 +68,6 @@ input {
 }
 
 .danger {
-  margin-top: 32px;
   color: $danger;
 }
 
@@ -83,6 +83,10 @@ input {
 .active {
   font-weight: bold;
   color: $dark;
+
+  &:hover {
+    font-style: normal;
+  }
 }
 
 .inactive {

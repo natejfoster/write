@@ -8,11 +8,11 @@ import '../../css/menu.scss';
 const Menu = ({username}) => {
   return (
     <div className='menu'>
-      <h4 className='clickable menu__username'><NavLink to={ROUTES.PROFILE}>{username}</NavLink></h4>
-      <h4 className='clickable'><NavLink exact to={ROUTES.LANDING}>Write</NavLink></h4>
-      <h4 className='clickable'><NavLink to={ROUTES.MAILBOX}>Mailbox</NavLink></h4>
-      <h4 className='clickable'><NavLink to={ROUTES.DRAFTS}>Drafts</NavLink></h4>
-      <h4 className='clickable'><NavLink to={ROUTES.ABOUT}>About</NavLink></h4>
+      <h4 className='menu__username'><NavLink to={ROUTES.PROFILE} className='clickable'>{username}</NavLink></h4>
+      <h4><NavLink exact to={ROUTES.LANDING} className='clickable'>Write</NavLink></h4>
+      <h4><NavLink to={ROUTES.MAILBOX} className='clickable'>Mailbox</NavLink></h4>
+      <h4><NavLink to={ROUTES.DRAFTS}  className='clickable'>Drafts</NavLink></h4>
+      <h4><NavLink to={ROUTES.ABOUT} className='clickable'>About</NavLink></h4>
     </div>
   );
 }
