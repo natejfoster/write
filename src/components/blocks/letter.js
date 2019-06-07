@@ -1,12 +1,12 @@
 import React from 'react';
-import { formatDate } from '../../util/functions';
+import { formatDate, formatLetter } from '../../util/functions';
 
 const Letter = ({from, date, text}) => {
   return (
     <div className='letter'>
       <span className='letter__name'>{from}</span>
       <span className='letter__date'>{formatDate(new Date(date))}</span>
-      <p className='letter__text'>{text}</p>
+      <p className='letter__text'>{formatLetter(text)}</p>
     </div>
   );
 }

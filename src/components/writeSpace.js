@@ -55,6 +55,8 @@ class WriteSpace extends Component {
   render() { 
     let {letter, email, isSaving, isSending} = this.state;
 
+    let showMenu = this.props.text !== '';
+
     let draft = 
       <React.Fragment>
         <div className='write main'>
@@ -64,16 +66,18 @@ class WriteSpace extends Component {
             type='text'
             onChange={this.props.onChange}
             autoFocus
-            placeholder='Write...'
+            placeholder='Write'
             inputRef={this.textInput}
           />
           {isSaving && <h6>Saved as draft</h6>}
         </div>
-        <div className='write__menu context-menu'>
-          <h4 className='clickable' onClick={() => this.sendFlow()}>Send</h4>
-          <h4 className='clickable' onClick={this.saveDraft}>Save as a draft</h4>
-          <h4 className='clickable write__clear danger' onClick={() => {this.props.startOver(this.textInput.current)}}>Start over</h4>
-        </div>
+        {showMenu &&
+          <div className='write__menu context-menu'>
+            <h4 className='clickable' onClick={() => this.sendFlow()}>Send</h4>
+            <h4 className='clickable' onClick={this.saveDraft}>Save as a draft</h4>
+            <h4 className='clickable write__clear danger' onClick={() => {this.props.startOver(this.textInput.current)}}>Start over</h4>
+          </div>
+        }
       </React.Fragment>
 
     let preSend = 

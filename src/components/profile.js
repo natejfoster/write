@@ -1,13 +1,20 @@
 import React from 'react';
+import '../css/profile.scss';
 
 
 
-const Profile = ({ logOut }) => {
+const Profile = ({ logOut, email, displayName }) => {
   return (
-    <div className='main'>
-      PROFILE
-      <h4 className='clickable danger' onClick={logOut}>Log Out</h4>
-    </div>
+    <React.Fragment>
+      <div className='main'>
+        <h4 className='profile__name'>{displayName}</h4>
+        <h4 className='profile__email'>{email}</h4>
+      </div>
+      <div className='context-menu'>
+        <h4 className='clickable danger' onClick={logOut}>Log Out</h4>
+      </div>
+    </React.Fragment>
+
   );
 }
  

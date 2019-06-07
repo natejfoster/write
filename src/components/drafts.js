@@ -28,7 +28,7 @@ class Drafts extends Component {
   editDraft = () => {
     this.props.editDraft(this.state.curDraft);
     this.props.delDraft(this.state.curDraft.key);
-    this.props.history.push('/')
+    this.props.history.push('/');
   }
 
   back = () => {

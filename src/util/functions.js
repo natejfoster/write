@@ -9,4 +9,12 @@ const formatDate = (date) => {
   return string;
 }
 
-export {truncate, formatDate};
+const formatLetter = (text) => {
+  console.log(text);
+  let formatted = text;
+  formatted.split('\n\n');
+  console.log(formatted);
+  return formatted
+}
+
+export {truncate, formatDate, formatLetter};

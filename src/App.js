@@ -180,7 +180,7 @@ class App extends Component {
                 startOver={this.startOver}
               />}  
             />
-            <Route path={ROUTES.PROFILE} render={() => <Profile logOut={this.logOut} />} />
+            <Route path={ROUTES.PROFILE} render={() => <Profile logOut={this.logOut} email={user.email} displayName={user.displayName}/>} />
             <Route path={ROUTES.MAILBOX} render={() => <Mailbox reccd={reccd} sent={sent} delLetter={this.deleteLetter}/>}  />
             <Route path={ROUTES.DRAFTS} render={() => <Drafts curLetter={letter} drafts={drafts} editDraft={this.editDraft} delDraft={this.deleteDraft}/>} />
             <Route path={ROUTES.ABOUT} component={About} />
