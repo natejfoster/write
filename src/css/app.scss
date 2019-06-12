@@ -97,3 +97,20 @@ input {
 .hidden {
   display: none;
 }
+
+.msg-wrapper {
+  white-space: pre-wrap;
+}
+
+@media screen and (max-width: 768px) {
+  .app {
+    display: inline;
+  }
+
+  .main {
+    padding-top: 92px;
+    padding-left: 28px;
+    padding-right: 28px;
+    padding-bottom: 144px;
+  }
+}

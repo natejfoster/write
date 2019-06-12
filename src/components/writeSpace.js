@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Textarea from 'react-textarea-autosize';
+import { formatLetter } from '../util/functions';
 
 import '../css/write-space.scss';
 
@@ -27,6 +28,8 @@ class WriteSpace extends Component {
   }
 
   sendFlow = () => {
+    let test = formatLetter(this.textInput.current.value);
+    console.log(test);
     this.setState({isSending: true, letter: this.textInput.current.value})
     //wait for a bit, then load into get email page
     window.setTimeout(() => this.setState({preSend: false}), 2000)

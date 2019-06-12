@@ -10,10 +10,7 @@ const formatDate = (date) => {
 }
 
 const formatLetter = (text) => {
-  console.log(text);
-  let formatted = text;
-  formatted.split('\n\n');
-  console.log(formatted);
+  let formatted = text.replace(/(?:\r\n|\r|\n)/g, '<br>');
   return formatted
 }
 

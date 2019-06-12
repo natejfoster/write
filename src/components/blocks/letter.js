@@ -3,11 +3,11 @@ import { formatDate, formatLetter } from '../../util/functions';
 
 const Letter = ({from, date, fromEmail, text}) => {
   return (
-    <div className='letter'>
+    <div className='letter msg-wrapper'>
       <span className='letter__name'>{from}</span>
       <span className='letter__date'>{formatDate(new Date(date))}</span>
       <h6 className='letter__email'>{fromEmail}</h6>
-      <p className='letter__text'>{formatLetter(text)}</p>
+      <p className='letter__text'>{text}</p>
     </div>
   );
 }

@@ -26,9 +26,12 @@ class About extends Component {
           <p className='about__paragraph'>
             To help you write letters, Write prompts you periodically with self-reflective questions to ask yourself and to ask people around you. Once you send a letter with Write, it will be delivered at a random moment within seven days after sending. When someone knows the exact moment a message was delivered and seen, an expectation for a hasty response is placed on both the sender and receiver.  By delivering letters serendipitously, Write creates a space for reflecting on the content of the letter. 
           </p>
+          <p className='about_paragraph'>
+            Write is a project designed by <span className='about__credit'>Matt Wright</span> and developed by <span className='about__credit clickable'><a target='_blank' href='https://www.nathanjfoster.com'>Nathan Foster</a></span>. 
+          </p>
         </div>
         <div className='context-menu'>
-          <h4 className='clickable' onClick={this.switchView}>Privacy Statement</h4>
+          {/* <h4 className='clickable' onClick={this.switchView}>Privacy Statement</h4> */}
         </div>
       </React.Fragment>
 
@@ -47,7 +50,7 @@ class About extends Component {
         </div>
       </React.Fragment>
 
-    return (this.state.onPrivacy ? privacy : about);
+    return (about);
   }
 }
  
