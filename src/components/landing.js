@@ -52,7 +52,6 @@ class Landing extends Component {
       pass: '',
       name: ''
     }, () => this.textInput.current.focus())
-    
   }
 
   render() { 

@@ -13,7 +13,8 @@ class WriteSpace extends Component {
       isSending: false,
       preSend: true,
       sent: false,
-      isSaving: false
+      isSaving: false,
+      isDeleting: false
      }
      this.textInput = React.createRef();
   }
@@ -60,11 +61,30 @@ class WriteSpace extends Component {
     });
   }
 
+  initStartOver = () => {
+    this.setState({isDeleting: true});
+  }
+
+  startOver = (text) => {
+    this.props.startOver(text);
+    this.setState({isDeleting: false});
+  }
+
+  cancelStartOver = () => {
+    this.setState({isDeleting: false});
+  }
 
   render() { 
-    let {letter, email, isSaving, isSending} = this.state;
+    let {letter, email, isSaving, isSending, isDeleting} = this.state;
 
     let showMenu = this.props.text !== '';
+
+    let deleteMenu = 
+      <React.Fragment>
+        <h4 className='clickable' onClick={this.cancelStartOver}>Don't start over</h4>
+        <h4 className='clickable danger' onClick={() => this.startOver(this.textInput.current)}>Click to start over</h4>
+      </React.Fragment>
+
 
     let draft = 
       <React.Fragment>
@@ -84,7 +104,11 @@ class WriteSpace extends Component {
           <div className='write__menu context-menu'>
             <h4 className='clickable' onClick={() => this.sendFlow()}>Send</h4>
             <h4 className='clickable' onClick={this.saveDraft}>Save as a draft</h4>
-            <h4 className='clickable write__clear danger' onClick={() => {this.props.startOver(this.textInput.current)}}>Start over</h4>
+            {isDeleting ? 
+              deleteMenu
+            :
+              <h4 className='clickable write__clear danger' onClick={this.initStartOver}>Start over</h4>
+            }
           </div>
         }
       </React.Fragment>

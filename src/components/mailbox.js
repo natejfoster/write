@@ -12,6 +12,7 @@ class Mailbox extends Component {
     this.state = { 
       curView: 'reccd',
       isViewing: false,
+      isDeleting: false,
       curLetter: {}
     }
   }
@@ -26,18 +27,27 @@ class Mailbox extends Component {
     this.setState({isViewing: true, curLetter: letter});
   }
 
+  initDelete = () => {
+    this.setState({isDeleting: true});
+  }
+
   delLetter = (key) => {
     this.props.delLetter(key);
-    this.setState({isViewing: false, curLetter: {}});
+    this.setState({isViewing: false, isDeleting: false, curLetter: {}});
   }
+
 
   back = () => {
     this.setState({isViewing: false});
   }
 
+  cancelDelete = () => {
+    this.setState({isDeleting: false});
+  }
+
 
   render() { 
-    const {curView, isViewing, curLetter} = this.state; 
+    const {curView, isViewing, isDeleting, curLetter} = this.state; 
     let items = [];
     let sent = [...this.props.sent];
     let reccd = [...this.props.reccd];
@@ -48,6 +58,13 @@ class Mailbox extends Component {
       items = sent.reverse().map((item, key) => <SentItem key={key} name={item.to} date={item.date} />)
     } 
 
+    const deleteMenu = 
+      <React.Fragment>
+        <h4 className='clickable' onClick={() => this.cancelDelete}>Don't throw away</h4>
+        <h4 className='clickable danger' onClick={() => this.delLetter(curLetter.key)}>Click to throw away</h4>
+      </React.Fragment>
+
+
     return (
       isViewing ? 
         <React.Fragment>
@@ -56,7 +73,9 @@ class Mailbox extends Component {
           </div>
           <div className='mailbox__menu context-menu'>
             <h4 className='clickable' onClick={this.back}>Back to Mailbox</h4>
-            <h4 className='clickable danger' onClick={() => this.delLetter(curLetter.key)}>Throw away letter</h4>
+            {isDeleting ? 
+              deleteMenu : <h4 className='clickable danger' onClick={this.initDelete}>Throw away letter</h4>
+            }
           </div>
         </React.Fragment>
       :

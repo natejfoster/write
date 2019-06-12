@@ -11,6 +11,7 @@ class Drafts extends Component {
     super(props);
     this.state = {
       isViewing: false,
+      isDeleting: false,
       curDraft: {}
     }
   }
@@ -19,10 +20,17 @@ class Drafts extends Component {
     this.setState({isViewing: true, curDraft: draft});
   }
 
+  initDelete = () => {
+    this.setState({isDeleting: true});
+  }
+
   delDraft = (key) => {
-    console.log('deleting draft');
     this.props.delDraft(key);
-    this.setState({isViewing: false, curDraft: {}});
+    this.setState({isViewing: false, isDeleting: false, curDraft: {}});
+  }
+
+  cancelDelete = () => {
+    this.setState({isDeleting: false});
   }
 
   editDraft = () => {
@@ -36,7 +44,13 @@ class Drafts extends Component {
   }
 
   render() { 
-    const { isViewing, curDraft} = this.state; 
+    const { isViewing, isDeleting, curDraft} = this.state; 
+
+    let deleteMenu = 
+      <React.Fragment>
+        <h4 className='clickable' onClick={() => this.cancelDelete}>Don't throw away</h4>
+        <h4 className='clickable danger' onClick={() => this.delDraft(curDraft.key)}>Click to throw away</h4>
+      </React.Fragment>
 
     let draftSelected = 
       <React.Fragment>
@@ -46,7 +60,10 @@ class Drafts extends Component {
         <div className='mailbox__menu context-menu'>
           <h4 className='clickable' onClick={this.back}>Back to Drafts</h4>
           <h4 className='clickable' onClick={this.editDraft}>Edit draft</h4>
-          <h4 className='clickable danger drafts__delete' onClick={() => this.delDraft(curDraft.key)}>Throw away draft</h4>
+          {isDeleting ? 
+            deleteMenu : 
+            <h4 className='clickable danger drafts__delete' onClick={this.initDelete}>Throw away draft</h4>  
+          }
         </div>
       </React.Fragment>
 
