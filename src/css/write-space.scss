@@ -2,6 +2,9 @@
 
 .write {
   &__textarea {
+    padding-right: 80px;
+    padding-top: 96px;
+    padding-left: 48px;
     width: 100%;
     font-size: 16px;
     border: none;
@@ -12,6 +15,19 @@
     box-shadow: none;
 
     resize: none; 
+  }
+
+  &__saved {
+    padding-left: 48px;
+  }
+
+  &__send {
+    box-shadow: -1px 1px 6px rgba(32, 43, 69, .3);
+    padding-top: 96px;
+    padding-left: 48px;
+    padding-bottom: 64px;
+    padding-right: 72px;
+    min-height: 408px;
   }
 
   &__clear {

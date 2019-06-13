@@ -4,16 +4,24 @@
   margin: 0;
   box-sizing: border-box;
   padding: 0;
-  background-color: #FFF2E3;
+  background-color: #FFEEDD;
   color: $dark;
   font-family: input-serif,serif;
   line-height: 32px;
 }
 
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: calc(100vw - 100%);
+}
+
 .app {
+  margin-top: 48px;
   display: grid;
-  grid-template-columns: 75vw auto;
-  grid-template-rows: 272px auto;
+  grid-template-columns: 696px 192px;
+  grid-template-rows: 224px auto;
   grid-template-areas:
     "main main-menu"
     "main context-menu";
@@ -21,15 +29,12 @@
 
 .main {
   grid-area: main;
-  padding-top: 144px;
-  padding-left: 96px;
-  padding-right: 144px;
+  margin-right: 64px;
   padding-bottom: 144px;
 }
 
 .menu {
   grid-area: main-menu;
-  padding-top: 48px;
 }
 
 
@@ -98,7 +103,11 @@ input {
   display: none;
 }
 
-.msg-wrapper {
+.space--between {
+  margin-top: 32px;
+}
+
+.letter--wrapper {
   white-space: pre-wrap;
 }
 

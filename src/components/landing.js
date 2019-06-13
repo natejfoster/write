@@ -59,7 +59,7 @@ class Landing extends Component {
       <div>
         <input 
           type='text' 
-          placeholder='Type your email to log in' 
+          placeholder={this.state.newUser ? 'Type your email to sign up' : 'Type your email to log in'}
           onChange={this.onChange}
           onKeyDown={this.onEnter} 
           name='email' 
@@ -115,14 +115,14 @@ class Landing extends Component {
 
     const menu =
       <div className='menu landing__menu'>
-        <h4 className='clickable' onClick={this.back}>Back to home</h4>
+        <h6 className='clickable' onClick={this.back}>Back to home</h6>
       </div>
 
 
     return (
       <React.Fragment>
           <MediaQuery query="(max-device-width: 768px)">
-            <div className='main'>
+            <div className='main landing'>
               <p>Write is an experience best enjoyed on a larger screen. </p>
               <p>Visit soon!</p>
               <p>
@@ -134,12 +134,12 @@ class Landing extends Component {
             </div>
           </MediaQuery>
           <MediaQuery query='(min-device-width: 769px)'>
-            <div className='main'>
+            <div className='main landing'>
               <p>
                 Write helps you communicate with the people you love.
               </p>
               <p>
-                Letter writing is reflective and connecting for both the reader and writer. It’s a unique opportunity to reflect, discover more about someone else, and focus on expressing yourself through writing. By bringing reflection and connection into an online letter writing space, Write reclaims the meaning lost in digital communication.
+                By bringing reflection, discovery, and expression together in an online space, Write reclaims the meaning and clarity lost in digital communication.
               </p>
               {
                 this.state.emailEntered ? this.state.passEntered ? getName : getPassword : getEmail

@@ -55,13 +55,16 @@ class Mailbox extends Component {
     if (curView === 'reccd') {
       items = reccd.reverse().map((letter, key) => <ReccdItem key={key} from={letter.from} date={letter.date} text={letter.text} onClick={() => this.selectLetter(letter)}/>)
     } else {
-      items = sent.reverse().map((item, key) => <SentItem key={key} name={item.to} date={item.date} />)
+      items = 
+        <div className='mailbox__sent'>
+          {sent.reverse().map((item, key) => <SentItem key={key} name={item.to} date={item.date} />)}
+        </div>
     } 
 
     const deleteMenu = 
       <React.Fragment>
-        <h4 className='clickable' onClick={() => this.cancelDelete}>Don't throw away</h4>
-        <h4 className='clickable danger' onClick={() => this.delLetter(curLetter.key)}>Click to throw away</h4>
+        <h6 className='clickable space--between' onClick={this.cancelDelete}>Don't throw away</h6>
+        <h6 className='clickable danger' onClick={() => this.delLetter(curLetter.key)}>Click to throw away</h6>
       </React.Fragment>
 
 
@@ -72,9 +75,9 @@ class Mailbox extends Component {
             <Letter from={curLetter.from} date={curLetter.date} fromEmail={curLetter.fromEmail} text={curLetter.text} />
           </div>
           <div className='mailbox__menu context-menu'>
-            <h4 className='clickable' onClick={this.back}>Back to Mailbox</h4>
+            <h6 className='clickable' onClick={this.back}>Back to Mailbox</h6>
             {isDeleting ? 
-              deleteMenu : <h4 className='clickable danger' onClick={this.initDelete}>Throw away letter</h4>
+              deleteMenu : <h6 className='clickable danger space--between' onClick={this.initDelete}>Throw away letter</h6>
             }
           </div>
         </React.Fragment>
@@ -84,8 +87,8 @@ class Mailbox extends Component {
             {items.length !== 0 ? items : <h4 className='inactive'>No Messages</h4>}
           </div>
           <div className='mailbox__menu context-menu'>
-            <h4 name='reccd' className={`${curView === 'reccd' ? 'active' : ''} clickable`} onClick={(e) => this.switchView(e)} >Received</h4>
-            <h4 name='sent' className={`${curView === 'sent' ? 'active' : ''} clickable`} onClick={(e) => this.switchView(e)} >Sent</h4>
+            <h6 name='reccd' className={`${curView === 'reccd' ? 'active' : ''} clickable`} onClick={(e) => this.switchView(e)} >Received</h6>
+            <h6 name='sent' className={`${curView === 'sent' ? 'active' : ''} clickable`} onClick={(e) => this.switchView(e)} >Sent</h6>
           </div>
         </React.Fragment>
     );

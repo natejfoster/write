@@ -48,21 +48,21 @@ class Drafts extends Component {
 
     let deleteMenu = 
       <React.Fragment>
-        <h4 className='clickable' onClick={() => this.cancelDelete}>Don't throw away</h4>
-        <h4 className='clickable danger' onClick={() => this.delDraft(curDraft.key)}>Click to throw away</h4>
+        <h6 className='clickable space--between' onClick={this.cancelDelete}>Don't throw away</h6>
+        <h6 className='clickable danger' onClick={() => this.delDraft(curDraft.key)}>Click to throw away</h6>
       </React.Fragment>
 
     let draftSelected = 
       <React.Fragment>
-        <div className='mailbox__list main'>
+        <div className='drafts main'>
           <div>{curDraft.text}</div>
         </div>
-        <div className='mailbox__menu context-menu'>
-          <h4 className='clickable' onClick={this.back}>Back to Drafts</h4>
-          <h4 className='clickable' onClick={this.editDraft}>Edit draft</h4>
+        <div className='drafts__menu context-menu'>
+          <h6 className='clickable' onClick={this.back}>Back to Drafts</h6>
+          <h6 className='clickable' onClick={this.editDraft}>Edit draft</h6>
           {isDeleting ? 
             deleteMenu : 
-            <h4 className='clickable danger drafts__delete' onClick={this.initDelete}>Throw away draft</h4>  
+            <h6 className='clickable danger drafts__delete space--between' onClick={this.initDelete}>Throw away draft</h6>  
           }
         </div>
       </React.Fragment>

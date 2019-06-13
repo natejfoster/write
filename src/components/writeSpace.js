@@ -29,10 +29,7 @@ class WriteSpace extends Component {
   }
 
   sendFlow = () => {
-    let test = formatLetter(this.textInput.current.value);
-    console.log(test);
     this.setState({isSending: true, letter: this.textInput.current.value})
-    //wait for a bit, then load into get email page
     window.setTimeout(() => this.setState({preSend: false}), 2000)
   };
 
@@ -81,8 +78,8 @@ class WriteSpace extends Component {
 
     let deleteMenu = 
       <React.Fragment>
-        <h4 className='clickable' onClick={this.cancelStartOver}>Don't start over</h4>
-        <h4 className='clickable danger' onClick={() => this.startOver(this.textInput.current)}>Click to start over</h4>
+        <h6 className='clickable space--between' onClick={this.cancelStartOver}>Don't start over</h6>
+        <h6 className='clickable danger' onClick={() => this.startOver(this.textInput.current)}>Click to start over</h6>
       </React.Fragment>
 
 
@@ -98,16 +95,16 @@ class WriteSpace extends Component {
             placeholder='Write'
             inputRef={this.textInput}
           />
-          {isSaving && <h6>Saved as draft</h6>}
+          {isSaving && <h6 className='write__saved'>Saved as draft</h6>}
         </div>
         {showMenu &&
           <div className='write__menu context-menu'>
-            <h4 className='clickable' onClick={() => this.sendFlow()}>Send</h4>
-            <h4 className='clickable' onClick={this.saveDraft}>Save as a draft</h4>
+            <h6 className='clickable' onClick={() => this.sendFlow()}>Send</h6>
+            <h6 className='clickable' onClick={this.saveDraft}>Save as a draft</h6>
             {isDeleting ? 
               deleteMenu
             :
-              <h4 className='clickable write__clear danger' onClick={this.initStartOver}>Start over</h4>
+              <h6 className='clickable write__clear danger' onClick={this.initStartOver}>Start over</h6>
             }
           </div>
         }
@@ -115,12 +112,12 @@ class WriteSpace extends Component {
 
     let preSend = 
       <div className='write main'>
-        <div className='letter'>{letter}</div>
+        <div className='write__send letter--wrapper'><p>{letter}</p></div>
       </div>
 
     let enterEmail =
       <div className='write main'>
-        <div className='letter'>
+        <div className='write__send'>
           <input autoFocus type='text' placeholder='Email' onChange={(e) => this.getEmail(e)}/>
           <h4>Who would you like to send this letter to?</h4>
           {this.state.email !== '' && <h6 className='clickable' onClick={() => this.sendLetter(letter, email)}>Click here to send</h6>}
@@ -129,7 +126,7 @@ class WriteSpace extends Component {
 
     let sent = 
     <div className='write main'>
-      <div className='letter'>
+      <div className='write__send'>
         <h4>Sent!</h4>
       </div>
     </div>
@@ -139,8 +136,8 @@ class WriteSpace extends Component {
       <React.Fragment>
         {this.state.preSend ? preSend : this.state.sent ? sent : enterEmail}
         <div className='write__menu context-menu'>
-          <h4 className='active'>Send</h4>
-          <h4 className='clickable danger write__cancel' onClick={this.cancel}>Cancel</h4>
+          <h6 className='active'>Send</h6>
+          <h6 className='clickable danger write__cancel' onClick={this.cancel}>Cancel</h6>
         </div>
       </React.Fragment>
 

@@ -5,6 +5,7 @@ import {
   Route
 } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
+import MediaQuery from 'react-responsive';
 
 import Menu from './components/blocks/menu';
 import Profile from './components/profile';
@@ -62,6 +63,7 @@ class App extends Component {
         toEmail: email
       }
       db.push('letterCollection', {data: newLetter})
+        .then(this.setState({letter: ''}))
     })
   }
 

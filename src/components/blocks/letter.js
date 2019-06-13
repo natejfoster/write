@@ -1,9 +1,9 @@
 import React from 'react';
-import { formatDate, formatLetter } from '../../util/functions';
+import { formatDate } from '../../util/functions';
 
 const Letter = ({from, date, fromEmail, text}) => {
   return (
-    <div className='letter msg-wrapper'>
+    <div className='letter letter--wrapper'>
       <span className='letter__name'>{from}</span>
       <span className='letter__date'>{formatDate(new Date(date))}</span>
       <h6 className='letter__email'>{fromEmail}</h6>

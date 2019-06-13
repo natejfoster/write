@@ -1,10 +1,12 @@
 @import '_variables';
 
 .mailbox {
-  &__list {
-    width: 100%;
+  &__sent {
+    padding-top: 96px;
+    padding-left: 48px;
   }
 }
+
 
 .sent-item {
   margin-bottom: 32px;
@@ -20,13 +22,13 @@
 }
 
 .reccd-item {
-  height: 400px;
+  height: 340px;
 }
 
 .reccd-item, .letter {
   box-shadow: -1px 1px 6px rgba(32, 43, 69, .3);
   padding-top: 64px;
-  padding-left: 32px;
+  padding-left: 48px;
   padding-bottom: 64px;
   padding-right: 72px;
   margin-bottom: 32px;
