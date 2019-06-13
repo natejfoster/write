@@ -1,9 +1,6 @@
 import React, {Component} from 'react';
 import { db, auth } from './util/firebase'
-import {
-  BrowserRouter as Router,
-  Route
-} from 'react-router-dom';
+import { Router, Route } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import MediaQuery from 'react-responsive';
 
@@ -107,8 +104,17 @@ class App extends Component {
   logOut = () => {
     auth.signOut()
         .then(() => {
-          this.setState({loggedIn: false});
-          history.push('/');
+          history.push(ROUTES.LANDING)
+          this.setState(
+            {
+              letter: '',
+              loggedIn: false,
+              user: {},
+              sent: [],
+              reccd: [],
+              drafts: []
+            }
+          );
         })
         .catch(e => console.log(e));
   }
@@ -171,8 +177,8 @@ class App extends Component {
   render() { 
     let {user, drafts, letter, reccd, sent} = this.state;
     return (
-      this.state.loggedIn ?
-        <Router history={history}>
+      <Router history={history}>
+        {this.state.loggedIn ?
           <div className='app'>
             <Route exact path={ROUTES.LANDING} render={() => 
               <WriteSpace
@@ -189,13 +195,12 @@ class App extends Component {
             <Route path={ROUTES.ABOUT} component={About} />
             <Menu username={user.displayName}/>
           </div>
-        </Router>
-      :
-        <Router>
+        :
           <div className='app'>
             <Route path={ROUTES.LANDING} render={() => <Landing logIn={this.logIn} signUp={this.signUp} />} />
           </div>
-        </Router>
+        }
+      </Router>
     );
   }
 }
