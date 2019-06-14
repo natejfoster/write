@@ -55,7 +55,10 @@ class Landing extends Component {
   }
 
   render() { 
-    const write = <em>Write</em>
+    const welcomeMsg = this.state.newUser ?
+        <h6>Welcome to <em>Write</em>! Press enter to continue</h6>
+      : 
+        <h6>Welcome! Press enter to continue</h6>
 
     const getEmail = 
       <div>
@@ -68,11 +71,7 @@ class Landing extends Component {
           autoFocus
           ref={this.textInput}
         />
-        {this.state.email !== '' && this.state.newUser ? 
-          <h6>Welcome to <em>Write</em>! Press enter to continue</h6>
-          : 
-          <h6>Welcome! Press enter to continue</h6>
-        }
+        {this.state.email !== '' && welcomeMsg}
         <h6 className='clickable landing__sign-in-up' onClick={this.toggleNewUser}>
           {this.state.newUser ?
             'Returning user? Click to log in'
